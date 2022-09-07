@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8" />
+	    <link rel="icon" href="favicon.ico" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	    <meta name="theme-color" content="#000000" />
+	    <meta
+	      name="description"
+	      content="Express MySQL Rest API"
+		/>
+		<link rel="stylesheet" href="style.css">
+		<link href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  		<script src="https://kit.fontawesome.com/97897db37e.js" crossorigin="anonymous"></script>
+	    <title>Express-MySQL API</title>
+	</head>
+	<body>
+		<header class="bd-header py-3 d-flex align-items-stretch border-dark header sticky-top">
+			<div class="container-fluid d-flex align-items-center">
+				<h1 class="d-flex align-items-center fs-4 text-white mb-0">
+					<img class="me-3" src="https://i.imgur.com/X301Q5Z.png" width="68" height="30" />
+				</h1>
+				<a href="https://portfolio-309.herokuapp.com/" class="ms-auto link-light">Abdul Raheem</a>
+			</div>
+		</header>
+		<div class="container-fluid">
+			<div class="row">
+			  <!-- <div class="col-2 sidenav bg-dark variant-dark side">
+			    <div id="list-example" class="list-group p-3 bg-dark">
+			      <a class="list-group-item border-light list-group-item-action bg-dark link-light" href="#list-item-1">Getting Started</a>
+			      <a class="list-group-item border-light list-group-item-action bg-dark link-light" href="#list-item-2">Endpoints</a>
+			      <a class="list-group-item border-light list-group-item-action bg-dark link-light" href="#list-item-3">Authentication</a>
+			      <a class="list-group-item border-light list-group-item-action bg-dark link-light" href="#list-item-4">Get Table Records</a>
+			      <a class="list-group-item border-light list-group-item-action bg-dark link-light" href="#list-item-5">Get Single Record</a>
+			    </div>
+			  </div> -->
+			  <div class="col-12 main">
+			  	<div class="row  mb-3">
+			  		<div class="col-lg-9 col-md-12 col-sm-12 ">
+					    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example p-3" tabindex="0">
+					      <h4 id="list-item-1">Getting Started</h4>
+					      <p>Welcome to my MySQL Express API. This is a simple to use Restful API created to perform CRUD operations on MariaDB. You can use <code>POST</code> to create row or send data, <code>GET</code> to read rows, <code>PUT</code> to update row and <code>DELETE</code> to delete row.</p>
+					      <h5>Try Now</h5>
+					      <p>
+					      	CRUD - <a href="api/users">/api/users</a>
+					      </p>
+					      <p>
+					      	Login - <a href="login">/login</a>
+					      </p>
+					    </div>
+						</div>
+						<div class="col-lg-3 col-md-12 col-sm-12 "></div>
+					</div>
+			  	<div class="row mb-3">
+			  		<div class="col-lg-9 col-md-12 col-sm-12 ">
+					    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example p-3" tabindex="0">
+					      <h4 id="list-item-2">Endpoints</h4>
+					      <p>There are two endpoint, one for CRUD operations and the other one for LOGIN.</p>
+					      <ul>
+					      	<li><p><code>/api</code> can be used to perform CRUD operations.</p></li>
+					      	<li><p><code>/login</code> can be used to login and get x-access-token.</p></li>
+					      </ul>
+					    </div>
+						</div>
+						<div class="col-lg-3 col-md-12 col-sm-12 "></div>
+					</div>
+			  	<div class="row mb-3">
+			  		<div class="col-lg-9 col-md-12 col-sm-12">
+					    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example p-3" tabindex="0">
+					      <h4 id="list-item-3">Authentication</h4>
+					      <p>To use this API you need to login first and set <code>x-access-token</code> header to be able to send requests.</p>
+					      <p>To login you need to have a Username or Email and Password.</p>
+					      <h5>JSON POST DATA</h5>
+					      <p>
+					      	<h6>With Username:</h6>
+					      	<code>
+					      		{
+					      			"username": "YOUR USERNAME",
+					      			"password": "YOUR PASSWORD"
+					      		}
+					      	</code>
+					      </p>
+					      <p>
+					      	<h6>With Email:</h6>
+					      	<code>
+					      		{
+					      			"email": "YOUR EMAIL",
+					      			"password": "YOUR PASSWORD"
+					      		}
+					      	</code>
+					      </p>
+					      <h5>Request</h5>
+					      <h6><code>POST</code> - <code>/login</code></h6>
+					      <h5>Request Body</h5>
+					      <table class="table">
+					      	<thead>
+					      		<tr>
+					      			<th>Field</th>
+					      			<th>Value Type</th>
+					      			<th>Required</th>
+					      		</tr>
+					      	</thead>
+					      	<tbody>
+					      		<tr>
+					      			<td>username</td>
+					      			<td>String</td>
+					      			<td>true (if email not given)</td>
+					      		</tr>
+					      		<tr>
+					      			<td>email</td>
+					      			<td>String (Email)</td>
+					      			<td>true (if username not given)</td>
+					      		</tr>
+					      		<tr>
+					      			<td>password</td>
+					      			<td>String</td>
+					      			<td>true</td>
+					      		</tr>
+					      	</tbody>
+					      </table>
+					    </div>
+						</div>
+						<div class="col-lg-3 col-md-12 col-sm-12 bg-dark p-0">
+							<header class="bd-header py-3 d-flex align-items-stretch bg-dark mb-4">
+								<div class="container-fluid d-flex align-items-center">
+									<h6 class="link-light">Response</h6>
+								</div>
+							</header>
+							<div class="align-center">
+							<p>
+								<code>
+									&nbsp;&nbsp;{<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 1,<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"fname": "FIRST NAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"lname": "LAST NAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"username": "USERNAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"password": "PASSWORD",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"email": "EMAIL",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"token": "X-ACCESS-TOKEN"<br />
+									&nbsp;&nbsp;}
+								</code>
+							</p>
+							</div>
+						</div>
+					</div>
+			  	<div class="row mb-3">
+			  		<div class="col-lg-9 col-md-12 col-sm-12">
+					    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example p-3" tabindex="0">
+					      <h4 id="list-item-4">Get all table records</h4>
+					      <p>To get all records from a table you need to put "Table Name" in place of <code>:table_name</code>.</p>
+					      <h5>Request</h5>
+					      <h6><code>GET</code> - <code>/api/:table_name</code></h6>
+					      <h5>Headers</h5>
+					      <table class="table">
+					      	<thead>
+					      		<tr>
+					      			<th>Field</th>
+					      			<th>Value</th>
+					      			<th>Required</th>
+					      		</tr>
+					      	</thead>
+					      	<tbody>
+					      		<tr>
+					      			<td>x-access-token</td>
+					      			<td>JWT Token</td>
+					      			<td>true</td>
+					      		</tr>
+					      		<tr>
+					      			<td>Content-Type</td>
+					      			<td>application/json</td>
+					      			<td>true</td>
+					      		</tr>
+					      	</tbody>
+					      </table>
+					    </div>
+						</div>
+						<div class="col-lg-3 col-md-12 col-sm-12 bg-dark p-0 border-light">
+							<header class="bd-header py-3 d-flex align-items-stretch bg-dark mb-4">
+								<div class="container-fluid d-flex align-items-center">
+									<h6 class="link-light">Response</h6>
+								</div>
+							</header>
+							<div class="align-center">
+							<p>
+								<code>
+									&nbsp;&nbsp;[{<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 1,<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"fname": "FIRST NAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"lname": "LAST NAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"username": "USERNAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"password": "PASSWORD",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"email": "EMAIL",<br />
+									&nbsp;&nbsp;}]
+								</code>
+							</p>
+							</div>
+						</div>
+					</div>
+			  	<div class="row mb-3">
+			  		<div class="col-lg-9 col-md-12 col-sm-12">
+					    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example p-3" tabindex="0">
+					      <h4 id="list-item-5">Get Single Record</h4>
+					      <p>To get a single record from a table you need to put "Table Name" in place of <code>:table_name</code> and "Record ID" in place of <code>:id</code>.</p>
+					      <h5>Request</h5>
+					      <h6><code>GET</code> - <code>/api/:table_name/:id</code></h6>
+					      <h5>Headers</h5>
+					      <table class="table">
+					      	<thead>
+					      		<tr>
+					      			<th>Field</th>
+					      			<th>Value</th>
+					      			<th>Required</th>
+					      		</tr>
+					      	</thead>
+					      	<tbody>
+					      		<tr>
+					      			<td>x-access-token</td>
+					      			<td>JWT Token</td>
+					      			<td>true</td>
+					      		</tr>
+					      		<tr>
+					      			<td>Content-Type</td>
+					      			<td>application/json</td>
+					      			<td>true</td>
+					      		</tr>
+					      	</tbody>
+					      </table>
+					    </div>
+						</div>
+						<div class="col-lg-3 col-md-12 col-sm-12 bg-dark p-0 border-light">
+							<header class="bd-header py-3 d-flex align-items-stretch bg-dark mb-4">
+								<div class="container-fluid d-flex align-items-center">
+									<h6 class="link-light">Response</h6>
+								</div>
+							</header>
+							<div class="align-center">
+							<p>
+								<code>
+									&nbsp;&nbsp;{<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 1,<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"fname": "FIRST NAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"lname": "LAST NAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"username": "USERNAME",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"password": "PASSWORD",<br />
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"email": "EMAIL",<br />
+									&nbsp;&nbsp;}
+								</code>
+							</p>
+							</div>
+						</div>
+					</div>
+			  	<div class="row mb-3">
+			  		<div class="col-lg-9 col-md-12 col-sm-12">
+					    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example p-3" tabindex="0">
+					      <h4 id="list-item-6">Create Record</h4>
+					      <p>To create a record into a table you need to put "Table Name" in place of <code>:table_name</code>.</p>
+					      <h5>Request</h5>
+					      <h6><code>POST</code> - <code>/api/:table_name</code></h6>
+					      <h5>Headers</h5>
+					      <table class="table">
+					      	<thead>
+					      		<tr>
+					      			<th>Field</th>
+					      			<th>Value</th>
+					      			<th>Required</th>
+					      		</tr>
+					      	</thead>
+					      	<tbody>
+					      		<tr>
+					      			<td>x-access-token</td>
+					      			<td>JWT Token</td>
+					      			<td>true</td>
+					      		</tr>
+					      		<tr>
+					      			<td>Content-Type</td>
+					      			<td>application/json</td>
+					      			<td>true</td>
+					      		</tr>
+					      	</tbody>
+					      </table>
+					      <h5>Request Body</h5>
+					      <table class="table">
+					      	<thead>
+					      		<tr>
+					      			<th>Field</th>
+					      			<th>Value Type</th>
+					      			<th>Required</th>
+					      		</tr>
+					      	</thead>
+					      	<tbody>
+					      		<tr>
+					      			<td>Data</td>
+					      			<td>JSON</td>
+					      			<td>true</td>
+					      		</tr>
+					      	</tbody>
+					      </table>
+					    </div>
+						</div>
+						<div class="col-lg-3 col-md-12 col-sm-12 bg-dark p-0 border-light">
+							<header class="bd-header py-3 d-flex align-items-stretch bg-dark mb-4">
+								<div class="container-fluid d-flex align-items-center">
+									<h6 class="link-light">Response</h6>
+								</div>
+							</header>
+							<div class="align-center">
+							<p>
+								<code>
+									&nbsp;&nbsp;{<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"fieldCount": 0,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"affectedRows": 1,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"insertId": < INSERTED_ID >,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"serverStatus": 2,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"warningCount": 0,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": "",<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"protocol41": true,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"changedRows": 0<br />
+									&nbsp;&nbsp;}
+								</code>
+							</p>
+							</div>
+						</div>
+					</div>
+			  	<div class="row mb-3">
+			  		<div class="col-lg-9 col-md-12 col-sm-12">
+					    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example p-3" tabindex="0">
+					      <h4 id="list-item-7">Update Record</h4>
+					      <p>To update a record into a table you need to put "Table Name" in place of <code>:table_name</code> and Record ID in place of <code>:id</code>.</p>
+					      <h5>Request</h5>
+					      <h6><code>PUT</code> - <code>/api/:table_name/:id</code></h6>
+					      <h5>Headers</h5>
+					      <table class="table">
+					      	<thead>
+					      		<tr>
+					      			<th>Field</th>
+					      			<th>Value</th>
+					      			<th>Required</th>
+					      		</tr>
+					      	</thead>
+					      	<tbody>
+					      		<tr>
+					      			<td>x-access-token</td>
+					      			<td>JWT Token</td>
+					      			<td>true</td>
+					      		</tr>
+					      		<tr>
+					      			<td>Content-Type</td>
+					      			<td>application/json</td>
+					      			<td>true</td>
+					      		</tr>
+					      	</tbody>
+					      </table>
+					      <h5>Request Body</h5>
+					      <table class="table">
+					      	<thead>
+					      		<tr>
+					      			<th>Field</th>
+					      			<th>Value Type</th>
+					      			<th>Required</th>
+					      		</tr>
+					      	</thead>
+					      	<tbody>
+					      		<tr>
+					      			<td>Data to Update</td>
+					      			<td>JSON</td>
+					      			<td>true</td>
+					      		</tr>
+					      	</tbody>
+					      </table>
+					    </div>
+						</div>
+						<div class="col-lg-3 col-md-12 col-sm-12 bg-dark p-0 border-light">
+							<header class="bd-header py-3 d-flex align-items-stretch bg-dark mb-4">
+								<div class="container-fluid d-flex align-items-center">
+									<h6 class="link-light">Response</h6>
+								</div>
+							</header>
+							<div class="align-center">
+							<p>
+								<code>
+									&nbsp;&nbsp;{<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"fieldCount": 0,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"affectedRows": 1,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"insertId": 0,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"serverStatus": 2,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"warningCount": 0,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": "(Rows matched: 1  Changed: 1  Warnings: 0",<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"protocol41": true,<br />
+									    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"changedRows": 1<br />
+									&nbsp;&nbsp;}
+								</code>
+							</p>
+							</div>
+						</div>
+					</div>
+			  	<div class="row mb-3">
+			  		<div class="col-lg-9 col-md-12 col-sm-12">
+					    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example p-3" tabindex="0">
+					      <h4 id="list-item-7">Delete Record</h4>
+					      <p>To delete a record from a table you need to put "Table Name" in place of <code>:table_name</code> and Record ID in place of <code>:id</code>.</p>
+					      <h5>Request</h5>
+					      <h6><code>DELETE</code> - <code>/api/:table_name/:id</code></h6>
+					      <h5>Headers</h5>
+					      <table class="table">
+					      	<thead>
+					      		<tr>
+					      			<th>Field</th>
+					      			<th>Value</th>
+					      			<th>Required</th>
+					      		</tr>
+					      	</thead>
+					      	<tbody>
+					      		<tr>
+					      			<td>x-access-token</td>
+					      			<td>JWT Token</td>
+					      			<td>true</td>
+					      		</tr>
+					      		<tr>
+					      			<td>Content-Type</td>
+					      			<td>application/json</td>
+					      			<td>true</td>
+					      		</tr>
+					      	</tbody>
+					      </table>
+					    </div>
+						</div>
+						<div class="col-lg-3 col-md-12 col-sm-12  p-0 border-light">
+						</div>
+					</div>
+			  </div>
+			</div>
+		</div>
+		<footer class="bg-dark text-center text-lg-start">
+		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color: #ddd;">
+		    © 2022 Copyright:
+		    <a class="text-light" href="https://portfolio-309.herokuapp.com/">Abdul Raheem</a>
+		  </div>
+		</footer>
+	</body>
+</html>
