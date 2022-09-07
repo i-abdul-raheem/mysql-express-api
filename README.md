@@ -5,7 +5,7 @@ mysql-express-api is a Node.js API for CRUD operations on MySQL.
 ## Clone Repo
 
 ```bash
-git clone 
+git clone https://github.com/i-abdul-raheem/mysql-express-api.git
 ```
 
 ## Installation
